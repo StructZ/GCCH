@@ -1,0 +1,11 @@
+<!--
+  Synthetic recreation of a Google Chat code block's DOM shape, not a capture of
+  any real message. The &nbsp; indentation, the per-line <div>s, the
+  <div><br></div> blank lines and the empty display:none spans are all
+  load-bearing for the extract tests. Do not tidy this markup. Its ugliness is
+  the test.
+
+  The surrounding toolbar (div.n5Mo1b) is trimmed to just the attribute we care
+  about, exclude-from-clipboard.
+-->
+<div class="kaPZDd"><article role="code" class="Byzfyc"><div>&nbsp;Prerequisites<span style="display: none;"></span></div><div><br></div><div>&nbsp; # Need API_TOKEN set (personal access token for the package registry)<span style="display: none;"></span></div><div>&nbsp; export API_TOKEN='&lt;your-api-token&gt;'<span style="display: none;"></span></div><div><br></div><div>&nbsp; # Set kubectl context to the right cluster<span style="display: none;"></span></div><div>&nbsp; az aks get-credentials --resource-group example-rg --name example-cluster<span style="display: none;"></span></div><div><br></div><div>&nbsp; # Must run from the deploy dir<span style="display: none;"></span></div><div>&nbsp; cd ~/.config/example-deploy<span style="display: none;"></span></div><div><br></div><div>&nbsp; helm repo update &amp;&amp; \<span style="display: none;"></span></div><div>&nbsp; helm template example-api example-charts/app \<span style="display: none;"></span></div><div>&nbsp; &nbsp; --values config/example-values.yaml \<span style="display: none;"></span></div><div>&nbsp; &nbsp; --namespace example-ns | \<span style="display: none;"></span></div><div>&nbsp; kubectl apply -f -<span style="display: none;"></span></div><div><br></div><div>&nbsp; kubectl get pods -n example-ns | grep -E "example-api|example-worker"<span style="display: none;"></span></div></article><div class="n5Mo1b" exclude-from-clipboard="true"><button aria-label="Toggle wrap"></button></div></div>
