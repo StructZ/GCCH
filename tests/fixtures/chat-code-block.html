@@ -1,0 +1,12 @@
+<!--
+  Verbatim capture of a real Google Chat code block, 2026-08-06.
+
+  The <article> and its children are exactly as Chat rendered them - the &nbsp;
+  indentation, the per-line <div>s, the <div><br></div> blank lines and the empty
+  display:none spans are all load-bearing for the extract tests. Do not tidy this
+  markup. Its ugliness is the test.
+
+  The surrounding toolbar (div.n5Mo1b) is trimmed to just the attribute we care
+  about, exclude-from-clipboard.
+-->
+<div class="kaPZDd"><article role="code" class="Byzfyc"><div>&nbsp;Prerequisites<span style="display: none;"></span></div><div><br></div><div>&nbsp; # Need GH_PAT set (GitHub PAT for helm repo access)<span style="display: none;"></span></div><div>&nbsp; export GH_PAT='&lt;your-github-pat&gt;'<span style="display: none;"></span></div><div><br></div><div>&nbsp; # Set kubectl context to the right cluster<span style="display: none;"></span></div><div>&nbsp; az aks get-credentials --resource-group motorq-release --name motorq-aks-release<span style="display: none;"></span></div><div><br></div><div>&nbsp; # Must run from the config dir<span style="display: none;"></span></div><div>&nbsp; cd ~/.ocr/.configs/replay337v4<span style="display: none;"></span></div><div><br></div><div>&nbsp; helm repo update &amp;&amp; \<span style="display: none;"></span></div><div>&nbsp; helm template fmca-api-replay337v4 motorq/q \<span style="display: none;"></span></div><div>&nbsp; &nbsp; --values outputs/fmca-api-config.yaml \<span style="display: none;"></span></div><div>&nbsp; &nbsp; --namespace replay337v4 | \<span style="display: none;"></span></div><div>&nbsp; kapp deploy -a fmca-api-replay337v4 -f - -n replay337v4 --yes<span style="display: none;"></span></div><div><br></div><div>&nbsp; kubectl get pods -n replay337v4 | grep -E "fmca-api|fmca-app"<span style="display: none;"></span></div></article><div class="n5Mo1b" exclude-from-clipboard="true"><button aria-label="Toggle wrap"></button></div></div>
