@@ -1,0 +1,44 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm run check
+
+      - run: pnpm run package
+
+      # Tag v1.2.3 must match the version packaged from manifest.json, so a
+      # tag typo can't ship a release under the wrong number.
+      - name: Verify tag matches manifest version
+        run: |
+          set -euo pipefail
+          tag="${GITHUB_REF_NAME#v}"
+          manifest_version=$(node -p "require('./dist/manifest.json').version")
+          if [ "$tag" != "$manifest_version" ]; then
+            echo "tag v$tag does not match manifest version $manifest_version"
+            exit 1
+          fi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: releases/*.zip
+          generate_release_notes: true

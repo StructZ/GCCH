@@ -109,6 +109,21 @@ Everything runs locally. No network requests, no analytics, no message content l
 the page. highlight.js and all theme CSS are bundled — nothing is fetched at runtime,
 and there is no `eval` anywhere, so the MV3 CSP story is trivial.
 
+## Releasing
+
+1. Bump `version` in **both** `package.json` and `manifest.json` (they must match).
+2. Commit, then tag: `git tag v1.2.3 && git push origin v1.2.3`.
+3. The [release workflow](.github/workflows/release.yml) runs `pnpm check`, builds,
+   packages `dist/` into `releases/gcch-1.2.3.zip`, and attaches it to a GitHub
+   Release — it fails the build if the tag and manifest version disagree.
+4. Download that zip from the release and upload it in the
+   [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole)
+   under your item → **Package** → **Upload new package**, then submit for review.
+
+Web Store publishing itself isn't automated here — it needs a Google Cloud OAuth
+client tied to your developer account. If that becomes worth automating later, the
+`chrome-webstore-upload-cli` package is the standard tool.
+
 ## Adding a language
 
 Two places, both required:
