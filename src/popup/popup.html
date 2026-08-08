@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>GCCH</title>
+    <link rel="stylesheet" href="./popup.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Code Highlighter</h1>
+      <p class="sub">Google Chat</p>
+    </header>
+
+    <label class="row" for="enabled">
+      <span class="label">Highlighting</span>
+      <input type="checkbox" id="enabled" class="switch" />
+    </label>
+
+    <label class="row" for="theme">
+      <span class="label">Theme</span>
+      <select id="theme"></select>
+    </label>
+
+    <label class="row" for="gmail">
+      <span class="label">
+        Chat in Gmail
+        <span class="hint">Requests access to mail.google.com</span>
+      </span>
+      <input type="checkbox" id="gmail" class="switch" />
+    </label>
+
+    <label class="row" for="debug">
+      <span class="label">
+        Debug logging
+        <span class="hint">Prints diagnostics to the console</span>
+      </span>
+      <input type="checkbox" id="debug" class="switch" />
+    </label>
+
+    <p id="status" class="status" role="status"></p>
+
+    <script type="module" src="./popup.ts"></script>
+  </body>
+</html>
