@@ -1,0 +1,8 @@
+dist
+releases
+node_modules
+pnpm-lock.yaml
+
+# Captured Chat markup. Its exact bytes are the test - reformatting it would
+# quietly invalidate the extraction assertions.
+tests/fixtures

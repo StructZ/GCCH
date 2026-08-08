@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Reads the pinned version from packageManager in package.json.
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Format
+        run: pnpm run format:check
+
+      - name: Test
+        run: pnpm run test
+
+      - name: Build
+        run: pnpm run build
+
+      # A content script that ships as ES module chunks silently fails to load in
+      # MV3, and nothing in the build errors. Assert the shape of the output.
+      - name: Verify extension bundle
+        run: |
+          set -euo pipefail
+          for f in manifest.json content.js popup.html icons/16.png icons/48.png icons/128.png; do
+            test -f "dist/$f" || { echo "missing dist/$f"; exit 1; }
+          done
+          if grep -qE '^\s*(import|export)\s' dist/content.js; then
+            echo "content.js contains ESM syntax - it must be a self-contained IIFE"
+            exit 1
+          fi
+          echo "bundle OK"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gcch-unpacked
+          path: dist/
+          retention-days: 14

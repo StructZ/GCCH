@@ -1,0 +1,15 @@
+node_modules
+dist
+releases
+icons/*.png
+*.log
+.DS_Store
+
+# pnpm is the package manager for this repo; see packageManager in package.json.
+package-lock.json
+yarn.lock
+
+# A global gitignore excludes docs/, but docs/DOM-NOTES.md is the ground truth for
+# every Chat selector we depend on. It has to be in the repo.
+!docs/
+!docs/**

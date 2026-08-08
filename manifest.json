@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "GCCH - Google Chat Code Highlighter",
+  "version": "1.0.0",
+  "description": "Syntax highlighting and a copy button for code blocks in Google Chat.",
+  "permissions": ["storage", "scripting"],
+  "host_permissions": ["https://chat.google.com/*"],
+  "optional_host_permissions": ["https://mail.google.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://chat.google.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "GCCH"
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  }
+}

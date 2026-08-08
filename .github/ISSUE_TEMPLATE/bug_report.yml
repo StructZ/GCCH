@@ -1,0 +1,60 @@
+name: Bug report
+description: Something is wrong with highlighting, copying, or themes
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Most bugs here are Google changing Chat's markup. The debug log below
+        usually identifies that in one line, so please include it.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What did you expect, and what did you get instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: debug
+    attributes:
+      label: Debug log
+      description: |
+        Open the GCCH popup, turn on **Debug logging**, reload Chat, then open
+        DevTools (Cmd/Ctrl+Shift+J) and paste any `[GCCH]` lines.
+
+        A line mentioning `selector miss` or `selector-fallback` means Chat's markup
+        changed - say so and we can usually fix it in one line.
+      render: text
+    validations:
+      required: false
+
+  - type: textarea
+    id: markup
+    attributes:
+      label: Code block markup
+      description: |
+        Only if highlighting did not appear at all. In DevTools, select the code
+        block, then run `$0.outerHTML` in the console and paste the result.
+
+        Redact anything sensitive - the structure is what matters, not the content.
+      render: html
+    validations:
+      required: false
+
+  - type: input
+    id: surface
+    attributes:
+      label: Where
+      placeholder: chat.google.com, Chat in Gmail, popped-out window
+    validations:
+      required: true
+
+  - type: input
+    id: versions
+    attributes:
+      label: Chrome and GCCH versions
+      placeholder: Chrome 130, GCCH 1.0.0
+    validations:
+      required: true
